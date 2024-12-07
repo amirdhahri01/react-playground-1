@@ -18,7 +18,7 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
-      <SwitchTransition>
+      <SwitchTransition component={null}>
         <CSSTransition key={location.pathname} classNames={"fade"} timeout={300} unmountOnExit >
           <Routes location={location}>
             <Route path="/" element={<Navbar />}>
