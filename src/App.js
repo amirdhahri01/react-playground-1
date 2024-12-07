@@ -10,8 +10,9 @@ import UserProfile from "./components/userProfile"
 import SearchUser from "./components/searchUser"
 import Login from "./components/login"
 import AuthProfile from "./components/authProfile"
-import { useState } from "react";
+import React, { useState } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
+const Users = React.lazy(() => import("./components/users"))
 function App() {
   const [username, setUsername] = useState("");
   const [isLogged, setIsLogged] = useState(false);
