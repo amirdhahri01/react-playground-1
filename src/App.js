@@ -21,7 +21,6 @@ function App() {
       <SwitchTransition component={null}>
         <CSSTransition key={location.pathname} classNames={"fade"} timeout={300} unmountOnExit >
           <Routes location={location}>
-            <Route path="/" element={<Navbar />}>
               <Route exact path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/users" element={<Users />} />
@@ -29,7 +28,6 @@ function App() {
               <Route path="/search" element={<SearchUser />} />
               <Route path="/login" element={<Login setIsLogged={setIsLogged} setUsername={setUsername} />} />
               <Route path="/authprofile" element={isLogged ? <AuthProfile username={username} /> : <Navigate replace to={"/login"} />} />
-            </Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </CSSTransition>
