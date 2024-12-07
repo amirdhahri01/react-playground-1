@@ -1,8 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import Home from "./components/home";
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState,Suspense } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import {appRoutes} from "./routes"
 
