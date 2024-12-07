@@ -20,7 +20,7 @@ function App() {
                     if(route.requiresAuth && !isLogged){
                       return  <Route key={route.path} path={route.path} element={<Navigate replace to={"/login"}/>}/>
                     }
-                    return <Route key={route.path}  path={route.path} element={<route.component/>}/>
+                    return <Route key={route.path}  path={route.path} element={<route.component setIsLogged={setIsLogged} setUsername={setUsername} username={username}/>}/>
               })}
             </Routes>
           </Suspense>
