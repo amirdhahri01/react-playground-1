@@ -4,13 +4,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./components/home";
 import React, { useState, lazy, Suspense } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-const Users = lazy(() => import("./components/users"))
-const AboutUs = lazy(() => import("./components/about"))
-const NotFound = lazy(() => import("./components/NotFound"))
-const UserProfile = lazy(() => import("./components/userProfile"))
-const SearchUser = lazy(() => import("./components/searchUser"))
-const Login = lazy(() => import("./components/login"))
-const AuthProfile = lazy(() => import("./components/authProfile"))
+import {appRoutes} from "./routes"
 
 function App() {
   const [username, setUsername] = useState("");
@@ -22,14 +16,12 @@ function App() {
         <CSSTransition key={location.pathname} classNames={"fade"} timeout={300} unmountOnExit >
           <Suspense fallback={<h1>Loading...</h1>}>
             <Routes location={location}>
-              <Route exact path="/" element={<Home />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/users/user/:username" element={<UserProfile />} />
-              <Route path="/search" element={<SearchUser />} />
-              <Route path="/login" element={<Login setIsLogged={setIsLogged} setUsername={setUsername} />} />
-              <Route path="/authprofile" element={isLogged ? <AuthProfile username={username} /> : <Navigate replace to={"/login"} />} />
-              <Route path="*" element={<NotFound />}></Route>
+              {appRoutes.map(route => {
+                    if(route.requiresAuth && !isLogged){
+                      return  <Route key={route.path} path={route.path} element={<Navigate replace to={"/login"}/>}/>
+                    }
+                    return <Route key={route.path}  path={route.path} element={<route.component/>}/>
+              })}
             </Routes>
           </Suspense>
         </CSSTransition>
